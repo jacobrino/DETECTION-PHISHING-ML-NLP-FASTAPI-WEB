@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Détection de Phishing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
+  <div class="max-w-xl w-full bg-white shadow-lg rounded-2xl p-6">
+    <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">Analyseur de Phishing</h1>
+    <form id="phishingForm" class="space-y-4">
+      <div>
+        <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Sujet</label>
+        <input type="text" id="subject" required placeholder="Ex: Verify your account"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+      </div>
+      <div>
+        <label for="body" class="block text-sm font-medium text-gray-700 mb-1">Contenu du message</label>
+        <textarea id="body" rows="5" required placeholder="Ex: Your PayPal account has been limited..."
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"></textarea>
+      </div>
+      <button type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition-all duration-200">
+        Analyser
+      </button>
+    </form>
+    <div id="result" class="mt-6 hidden p-4 rounded-lg border text-center text-lg font-medium"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('phishingForm');
+    const subjectInput = document.getElementById('subject');
+    const bodyInput = document.getElementById('body');
+    const resultDiv = document.getElementById('result');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      resultDiv.classList.add('hidden');
+      resultDiv.textContent = 'Analyse en cours...';
+      resultDiv.className = 'mt-6 p-4 rounded-lg border text-center text-lg font-medium bg-yellow-100 text-yellow-800';
+      resultDiv.classList.remove('hidden');
+
+      try {
+        const response = await fetch('http://localhost:8000/predict', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            subject: subjectInput.value,
+            body: bodyInput.value
+          })
+        });
+
+        const data = await response.json();
+        const prediction = data.prediction;
+
+        if (prediction === 'phishing') {
+          resultDiv.textContent = '⚠️ Ce message est classifié comme : PHISHING';
+          resultDiv.className = 'mt-6 p-4 rounded-lg border text-center text-lg font-medium bg-red-100 text-red-800';
+        } else if (prediction === 'non_phishing') {
+          resultDiv.textContent = '✅ Ce message est classifié comme : NON PHISHING';
+          resultDiv.className = 'mt-6 p-4 rounded-lg border text-center text-lg font-medium bg-green-100 text-green-800';
+        } else {
+          resultDiv.textContent = '❓ Résultat inconnu : ' + prediction;
+          resultDiv.className = 'mt-6 p-4 rounded-lg border text-center text-lg font-medium bg-gray-100 text-gray-800';
+        }
+      } catch (error) {
+        console.error(error);
+        resultDiv.textContent = 'Erreur lors de l’analyse. Veuillez réessayer.';
+        resultDiv.className = 'mt-6 p-4 rounded-lg border text-center text-lg font-medium bg-red-100 text-red-800';
+      }
+    });
+  </script>
+</body>
+</html>

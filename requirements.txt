@@ -1,0 +1,8 @@
+fastapi
+scikit-learn
+pandas
+joblib
+uvicorn
+nltk==3.8.1
+lxml
+beautifulsoup4
