@@ -5,6 +5,8 @@ Le pipeline inclut la **fusion de plusieurs datasets**, le **prétraitement**, l
 
 Ce projet a été dévéloppé en Juin 2025 mais publié en Décembre 2025 dans un cadre de mise à jour d'un Portfolio personnel.
 ---
+![phishing](https://github.com/jacobrino/DETECTION-PHISHING-NLP-FASTAPI-WEB/blob/develop/docs/web/index-phishing.png)
+![predict-label](https://github.com/jacobrino/DETECTION-PHISHING-NLP-FASTAPI-WEB/blob/develop/docs/predict-label.png)
 
 ## Fonctionnalités
 
