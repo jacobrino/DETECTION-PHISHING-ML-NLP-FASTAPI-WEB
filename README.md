@@ -1,6 +1,6 @@
 # Détection de Phishing par NLP (SVM + TF‑IDF) — API FastAPI
 
-Ce projet propose une approche **NLP** pour détecter des emails/messages de **phishing** à partir de leur contenu textuel.
+Ce projet propose une approche **NLP** pour détecter des emails/messages de **phishing** à partir de leur contenu textuel(Uniquement en langue Anglais).
 Le pipeline inclut la **fusion de plusieurs datasets**, le **prétraitement**, l’extraction de features via **TF‑IDF**, l’entraînement d’un modèle de Machine Learning (ML), classifieur **SVM**, puis le déploiement du modèle via une **API FastAPI**.
 
 Ce projet a été dévéloppé en Juin 2025 mais publié en Décembre 2025 dans un cadre de mise à jour d'un Portfolio personnel.
