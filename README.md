@@ -172,6 +172,27 @@ Le chargement est géré par `app/model_loader.py`.
 
 ---
 
+---
+
+## Résultats & métriques (approx.)
+
+Les performances obtenues sur l’évaluation (à titre indicatif) sont les suivantes :
+
+| Métrique | Valeur approximative |
+|---|---:|
+| Accuracy | ≈ **98.95 %** |
+| Faux positifs (FP) | **111** cas sur ~8400 *non-phishing* |
+| Faux négatifs (FN) | **63** phishing manqués sur ~8600 |
+| Recall (Rappel) | ≈ **99.27 %** |
+| Precision (Précision) | ≈ **98.72 %** |
+
+> Détails de calcul (résumé) :  
+> - Accuracy ≈ (7786 + 8538) / total  
+> - Recall ≈ TP / (TP + FN) = 8538 / (8538 + 63)  
+> - Precision ≈ TP / (TP + FP) = 8538 / (8538 + 111)
+
+
+
 ## Auteur
 
 **ANDRIANJARA Jacob Rino**  
